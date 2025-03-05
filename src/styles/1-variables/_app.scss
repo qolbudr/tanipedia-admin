@@ -78,7 +78,7 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black: #000 !default;
 
-$primary:       $blue !default;
+$primary:       #87C02A !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
@@ -230,7 +230,7 @@ $table-hover-bg: rgba($black, .0375) !default;
 // Sidebar general
 $sidebar-width: 260px !default;
 $sidebar-transition: margin-left .35s ease-in-out, left .35s ease-in-out, margin-right .35s ease-in-out, right .35s ease-in-out !default;
-$sidebar-bg: #222E3C !default;
+$sidebar-bg: #1D8032 !default;
 
 // Sidebar brand
 $sidebar-brand-padding-y: 1.15rem !default;
@@ -247,12 +247,12 @@ $sidebar-header-color: $gray-400 !default;
 // Sidebar link
 $sidebar-link-padding: .625rem 1.625rem !default;
 $sidebar-link-font-weight: 400 !default;
-$sidebar-link-bg: #222E3C !default;
+$sidebar-link-bg: #1D8032 !default;
 $sidebar-link-color: rgba($gray-200, 0.5) !default;
 $sidebar-link-border-left-color: transparent !default;
 
 $sidebar-link-hover-font-weight: $font-weight-normal !default;
-$sidebar-link-hover-bg: #222E3C !default;
+$sidebar-link-hover-bg: #1D8032 !default;
 $sidebar-link-hover-color: #{rgba($gray-200, 0.75)} !default;
 $sidebar-link-hover-border-left-color: transparent !default;
 

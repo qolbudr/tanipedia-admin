@@ -29,7 +29,7 @@ function DropdownUserProfile({}: Props) {
         <span className="text-dark me-1">Charles Hall</span>
       </Dropdown.Toggle>
       <Dropdown.Menu
-        className="dropdown-menu-end"
+        className="dropdown-menu-end mt-3"
         aria-labelledby="Profiledropdown"
       >
         <Dropdown.Item href="pages-profile.html">

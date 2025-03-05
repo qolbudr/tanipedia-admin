@@ -36,16 +36,8 @@ export default function App({ Component, pageProps }: AppPropsWrapp) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <meta
-          name="description"
-          content="Responsive Admin & Dashboard Template based on Bootstrap 5"
-        />
-        <meta name="author" content="AdminKit" />
-        <meta
-          name="keywords"
-          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
-        />
-        <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+        <meta name="author" content="qolbudr" />
+        <title>Tanipedia</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <SSRProvider>
@@ -56,7 +48,6 @@ export default function App({ Component, pageProps }: AppPropsWrapp) {
             <ToastsWrapper />
           </ComposeCtxProvider>
         </SSRProvider>
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );

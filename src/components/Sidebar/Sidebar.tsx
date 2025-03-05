@@ -66,7 +66,6 @@ export default function Sidebar({}: Props) {
             );
           })}
         </ul>
-        <SidebarCta />
       </SimpleBar>
     </nav>
   );

@@ -27,18 +27,62 @@ interface INavigation {
 
 const navigationConfigs: INavigation = {
   pages: {
-    title: 'Pages',
+    title: 'Master Data',
     navItems: [
       {
-        name: 'Dashboard',
-        icon: 'Sliders',
-        href: '/',
+        name: 'Pengguna',
+        icon: 'User',
+        href: '/user',
       },
       {
-        name: 'Profile',
-        icon: 'User',
-        href: '/pages-profile',
+        name: 'Edukasi',
+        icon: 'Book',
+        navSubItems: [
+          {
+            name: 'Video',
+            href: '/edukasi/video',
+          },
+          {
+            name: 'Artikel',
+            href: '/edukasi/artikel',
+          },
+        ],
       },
+      {
+        name: 'Pohon Dana',
+        icon: 'Info',
+        href: '/master-pohon-dana',
+      },
+    ],
+  },
+  sellerPage: {
+    title: 'Seller',
+    navItems: [
+      {
+        name: 'Produk',
+        icon: 'Book',
+        href: '/master-edukasi',
+      },
+      {
+        name: 'Pohon Dana',
+        icon: 'Info',
+        href: '/master-pohon-dana',
+      },
+    ],
+  },
+  misc: {
+    title: 'Misc',
+    navItems: [
+      {
+        name: 'Logout',
+        icon: 'LogOut',
+        href: '/logout',
+      },
+    ],
+  },
+  toolsComponents: {
+    title: 'Tools & Components',
+    navItems: [
       {
         name: 'Auth',
         icon: 'Users',
@@ -58,11 +102,6 @@ const navigationConfigs: INavigation = {
         icon: 'Book',
         href: '/pages-blank',
       },
-    ],
-  },
-  toolsComponents: {
-    title: 'Tools & Components',
-    navItems: [
       {
         name: 'UI Elements',
         icon: 'Briefcase',
