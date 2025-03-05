@@ -1,0 +1,169 @@
+.jvectormap-container {
+  width: 100%;
+  height: 350px !important;
+  svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  // svg {
+  //   -ms-touch-action: none;
+  //   touch-action: none;
+  // }
+
+  & > .jvectormap-tooltip {
+    border: 1px solid salmon;
+    // border-radius: 3px;
+    // background-color: #5c5cff;
+    // font-family: sans-serif, Verdana;
+    // font-size: smaller;
+    // box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.2);
+    // padding: 3px 5px;
+    // white-space: nowrap;
+    // position: absolute;
+    // display: none;
+    // color: #fff;
+  }
+
+  // image,
+  // text,
+  // .jvectormap-zoomin,
+  // .jvectormap-zoomout {
+  //   -webkit-user-select: none;
+  //   -moz-user-select: none;
+  //   -ms-user-select: none;
+  //   user-select: none;
+  // }
+
+  // // .jvectormap-container {
+
+  // // }
+
+  // .jvectormap-tooltip {
+  //   border-radius: 3px;
+  //   background-color: #5c5cff;
+  //   font-family: sans-serif, Verdana;
+  //   font-size: smaller;
+  //   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.2);
+  //   padding: 3px 5px;
+  //   white-space: nowrap;
+  //   position: absolute;
+  //   display: none;
+  //   color: #fff;
+  // }
+
+  // .jvectormap-tooltip.active {
+  //   display: block;
+  // }
+
+  // .jvectormap-zoom-btn {
+  //   border-radius: 3px;
+  //   background-color: #292929;
+  //   padding: 3px;
+  //   box-sizing: border-box;
+  //   position: absolute;
+  //   line-height: 10px;
+  //   cursor: pointer;
+  //   color: #fff;
+  //   height: 15px;
+  //   width: 15px;
+  //   left: 10px;
+  // }
+
+  // .jvectormap-zoom-btn.jvectormap-zoomout {
+  //   top: 30px;
+  // }
+
+  // .jvectormap-zoom-btn.jvectormap-zoomin {
+  //   top: 10px;
+  // }
+
+  // .jvectormap-series-container {
+  //   right: 15px;
+  //   position: absolute;
+  // }
+
+  // .jvectormap-series-container.jvectormap-series-h {
+  //   bottom: 15px;
+  // }
+
+  // .jvectormap-series-container.jvectormap-series-v {
+  //   top: 15px;
+  // }
+
+  // .jvectormap-series-container .jvectormap-legend {
+  //   background-color: #fff;
+  //   border: 1px solid #e5e7eb;
+  //   margin-left: 0.75rem;
+  //   border-radius: 0.25rem;
+  //   border-color: #e5e7eb;
+  //   padding: 0.6rem;
+  //   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  //   float: left;
+  // }
+
+  // .jvectormap-series-container .jvectormap-legend .jvectormap-legend-title {
+  //   line-height: 1;
+  //   border-bottom: 1px solid #e5e7eb;
+  //   padding-bottom: 0.5rem;
+  //   margin-bottom: 0.575rem;
+  //   text-align: left;
+  // }
+
+  // .jvectormap-series-container .jvectormap-legend .jvectormap-legend-inner {
+  //   overflow: hidden;
+  // }
+
+  // .jvectormap-series-container
+  //   .jvectormap-legend
+  //   .jvectormap-legend-inner
+  //   .jvectormap-legend-tick {
+  //   overflow: hidden;
+  //   min-width: 40px;
+  // }
+
+  // .jvectormap-series-container
+  //   .jvectormap-legend
+  //   .jvectormap-legend-inner
+  //   .jvectormap-legend-tick:not(:first-child) {
+  //   margin-top: 0.575rem;
+  // }
+
+  // .jvectormap-series-container
+  //   .jvectormap-legend
+  //   .jvectormap-legend-inner
+  //   .jvectormap-legend-tick
+  //   .jvectormap-legend-tick-sample {
+  //   border-radius: 4px;
+  //   margin-right: 0.65rem;
+  //   height: 16px;
+  //   width: 16px;
+  //   float: left;
+  // }
+
+  // .jvectormap-series-container
+  //   .jvectormap-legend
+  //   .jvectormap-legend-inner
+  //   .jvectormap-legend-tick
+  //   .jvectormap-legend-tick-text {
+  //   font-size: 12px;
+  //   text-align: center;
+  //   float: left;
+  // }
+
+  // .jvectormap-line[animation='true'] {
+  //   -webkit-animation: jvectormap-line-animation 10s linear forwards infinite;
+  //   animation: jvectormap-line-animation 10s linear forwards infinite;
+  // }
+
+  // @-webkit-keyframes jvectormap-line-animation {
+  //   from {
+  //     stroke-dashoffset: 250;
+  //   }
+  // }
+
+  // @keyframes jvectormap-line-animation {
+  //   from {
+  //     stroke-dashoffset: 250;
+  //   }
+  // }
+}

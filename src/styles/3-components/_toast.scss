@@ -1,0 +1,96 @@
+.toast-container-fixed {
+  position: fixed !important;
+  z-index: 1090;
+  overflow: hidden;
+  & .toast-notif {
+    box-sizing: border-box;
+    display: block;
+    flex-shrink: 0;
+    overflow: hidden;
+    pointer-events: auto;
+    position: relative;
+    border: 0;
+    transition: 0.1s all ease-in-out;
+    animation: notyf-fadeinup 0.3s ease-in-out forwards;
+    transform: scaleY(0) translate(8%);
+    clip-path: circle(6.5% at 71% 100%);
+    transform-origin: 100% 100%;
+    & .toast {
+      border: none;
+      margin: 0.2rem 0.4rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    & .toast-body {
+      padding: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    & .toast-body .toast-content {
+      padding: 1rem 0.95rem;
+      gap: 0.35rem;
+      display: flex;
+      align-items: center;
+    }
+
+    & .toast-icon {
+      padding: 6px;
+      // height: 24px;
+      width: max-content;
+      box-sizing: border-box;
+      border-radius: 50%;
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .toast-dismiss {
+      display: flex;
+      padding: 1rem 0.6rem;
+      align-items: center;
+      cursor: pointer;
+      // background-color: dark;
+    }
+  }
+}
+
+// @-webkit-keyframes notyf-fadeinup {
+//   0% {
+//     opacity: 0;
+//     transform: scaleY(0) translateY(5%);
+//     transition: 0.1s ease-in;
+//     clip-path: circle(6.5% at 71% 100%);
+//   }
+//   to {
+//     opacity: 1 !important;
+//     transform: scaleY(1) translateY(0%);
+//     transition: 0.9s ease-in-out;
+//     clip-path: circle(112.6% at 52% 100%);
+//   }
+// }
+
+@keyframes notyf-fadeinup {
+  0% {
+    opacity: 0;
+    transform: scaleY(0) translateY(8%);
+    transition: 0.5s ease-in;
+    clip-path: circle(6.5% at 71% 100%);
+  }
+  50% {
+    opacity: 0.3;
+    filter: brightness(40);
+    transform: scaleY(1) translateY(5%);
+    transition: 0.1s ease-in;
+    clip-path: circle(63.2% at 51% 82%);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0%);
+    transition: 0.3s ease-out;
+    filter: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
