@@ -5,12 +5,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInInputTypes, signInSchema } from '@utils/schema/authSchema';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { AuthRepository } from '@/repository/auth_repository';
+import useNotification from '@hooks/useNotification';
+import { handleError } from '@utils/handleError';
 
 type Props = {};
 
 function FormSignIn({ }: Props) {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
+  const notification = useNotification({duration: 500});
 
   const methods = useForm<SignInInputTypes>({
     resolver: zodResolver(signInSchema),
@@ -23,11 +27,15 @@ function FormSignIn({ }: Props) {
     formState: { errors },
   } = methods;
 
-  const onSubmitHandler = (inputs: SignInInputTypes) => {
-    setLoading(true);
-    // eslint-disable-next-line no-console
-    console.log(inputs);
-    router.push('/');
+  const onSubmitHandler = async (inputs: SignInInputTypes) => {
+    try {
+      setLoading(true);
+      const response = await AuthRepository.login(inputs.email, inputs.password);
+      router.push('/');
+    } catch (e) {
+      notification.danger(handleError(e))
+      setLoading(false);
+    }
   };
 
   React.useEffect(() => {
@@ -44,7 +52,7 @@ function FormSignIn({ }: Props) {
           size="lg"
           type="email"
           id="email"
-          placeholder="Enter your email"
+          placeholder="Masukkan email kamu"
           isInvalid={!!errors?.email}
           {...register('email')}
         />
@@ -55,12 +63,12 @@ function FormSignIn({ }: Props) {
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="password">Password</Form.Label>
+        <Form.Label htmlFor="password">Kata Sandi</Form.Label>
         <Form.Control
           size="lg"
           type="password"
           id="password"
-          placeholder="Enter your password"
+          placeholder="Masukkan kata sandi kamu"
           isInvalid={!!errors?.password}
           autoComplete="on"
           {...register('password')}
@@ -80,7 +88,7 @@ function FormSignIn({ }: Props) {
             name="remember-me"
             defaultChecked
           />
-          <span className="form-check-label">Remember me next time</span>
+          <span className="form-check-label">Ingat saya</span>
         </label>
       </div>
       <div className="text-center mt-3">
@@ -94,9 +102,9 @@ function FormSignIn({ }: Props) {
         {/* <button type="submit" class="btn btn-lg btn-primary">Sign in</button> */}
       </div>
       <div className='mt-3'>
-        <h5 className='text-center text-muted'>Dont have an account? 
+        <h5 className='text-center text-muted'>Belum punya akun?
           <span className='text-primary ms-1'>
-            <Link href='/auth/signup'>Sign Up</Link>
+            <Link href='/auth/signup'>Daftar</Link>
           </span>
         </h5>
       </div>

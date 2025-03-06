@@ -27,7 +27,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           return;
         }
 
-        if (!files || !files.file) {
+        if (!files || !files.photo) {
           res.status(400).json({ message: 'Foto adalah kolom wajib' });
           return;
         }
@@ -45,7 +45,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               phone: phone![0],
               address: address![0],
               role: 'seller',
-              photo: files.file[0].newFilename,
+              photo: files.photo[0].newFilename,
             },
           });
 

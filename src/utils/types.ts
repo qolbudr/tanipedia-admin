@@ -9,3 +9,9 @@ export type NotificationVariantTypes =
   | 'danger'
   | 'info'
   | 'warning';
+export type MainReponse<T> = {
+  message: string,
+  data: T,
+  token: string,
+  code: number
+}

@@ -5,20 +5,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpInputTypes, signUpSchema } from '@utils/schema/authSchema';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { AuthRepository } from '@/repository/auth_repository';
+import useNotification from '@hooks/useNotification';
+import { handleError } from '@utils/handleError';
 
 type Props = {};
 
 function FormSignUp({ }: Props) {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
+  const notification = useNotification({duration: 500});
 
   const methods = useForm<SignUpInputTypes>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      name: 'adminkit',
-      email: 'adminkit@adminkit.io',
-      company: 'adminkit',
-    },
+    defaultValues: {},
   });
 
   const {
@@ -27,11 +27,16 @@ function FormSignUp({ }: Props) {
     formState: { errors },
   } = methods;
 
-  const onSubmitHandler = (inputs: SignUpInputTypes) => {
-    setLoading(true);
-    // eslint-disable-next-line no-console
-    console.log(inputs);
-    router.push('/');
+  const onSubmitHandler = async (inputs: SignUpInputTypes) => {
+    try {
+      setLoading(true);
+      const response = await AuthRepository.register(inputs.name, inputs.email, inputs.password, inputs.phone, inputs.address, inputs.photo);
+      router.push('/auth/login');
+      notification.success(response.message);
+    } catch (e) {
+      notification.danger(handleError(e))
+      setLoading(false);
+    }
   };
 
   React.useEffect(() => {
@@ -43,12 +48,12 @@ function FormSignUp({ }: Props) {
   return (
     <Form method="POST" onSubmit={handleSubmit(onSubmitHandler)}>
       <div className="mb-3">
-        <Form.Label htmlFor="name">Name</Form.Label>
+        <Form.Label htmlFor="name">Nama</Form.Label>
         <Form.Control
           size="lg"
           type="text"
           id="name"
-          placeholder="Enter your name"
+          placeholder="Masukkan nama kamu"
           isInvalid={!!errors?.name}
           {...register('name')}
         />
@@ -64,7 +69,7 @@ function FormSignUp({ }: Props) {
           size="lg"
           type="email"
           id="email"
-          placeholder="Enter your email"
+          placeholder="Masukkan email kamu"
           isInvalid={!!errors?.email}
           {...register('email')}
         />
@@ -75,12 +80,12 @@ function FormSignUp({ }: Props) {
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="password">Password</Form.Label>
+        <Form.Label htmlFor="password">Kata Sandi</Form.Label>
         <Form.Control
           size="lg"
           type="password"
           id="password"
-          placeholder="Enter password"
+          placeholder="Masukkan kata sandi kamu"
           isInvalid={!!errors?.password}
           autoComplete="on"
           {...register('password')}
@@ -92,57 +97,58 @@ function FormSignUp({ }: Props) {
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="password">Phone</Form.Label>
+        <Form.Label htmlFor="phone">Telepon</Form.Label>
         <InputGroup className="mb-3">
           <InputGroup.Text>{"+62"}</InputGroup.Text>
           <Form.Control
             size="lg"
             type="textarea"
-            id="password"
-            placeholder="Enter password"
-            isInvalid={!!errors?.password}
+            id="phone"
+            placeholder="Masukkan nomor telepon kamu"
+            isInvalid={!!errors?.phone}
             autoComplete="on"
-            {...register('password')}
+            {...register('phone')}
           />
         </InputGroup>
-        {errors?.password?.message ? (
+        {errors?.phone?.message ? (
           <Form.Control.Feedback type="invalid" className=" pt-1">
-            {errors?.password?.message}
+            {errors?.phone?.message}
           </Form.Control.Feedback>
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="password">Alamat</Form.Label>
+        <Form.Label htmlFor="address">Alamat</Form.Label>
         <Form.Control
           as="textarea"
           size="lg"
           type="textarea"
-          id="password"
-          placeholder="Enter password"
-          isInvalid={!!errors?.password}
+          id="address"
+          placeholder="Masukkan alamat kamu"
+          isInvalid={!!errors?.address}
           autoComplete="on"
-          {...register('password')}
+          {...register('address')}
         />
-        {errors?.password?.message ? (
+        {errors?.address?.message ? (
           <Form.Control.Feedback type="invalid" className=" pt-1">
-            {errors?.password?.message}
+            {errors?.address?.message}
           </Form.Control.Feedback>
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="password">Photo</Form.Label>
+        <Form.Label htmlFor="photo">Photo</Form.Label>
         <Form.Control
           size="lg"
           type="file"
-          id="password"
-          placeholder="Enter password"
-          isInvalid={!!errors?.password}
+          id="photo"
+          placeholder="Masukkan foto kamu"
+          isInvalid={!!errors?.photo}
           autoComplete="on"
-          {...register('password')}
+          multiple={false}
+          {...register('photo')}
         />
-        {errors?.password?.message ? (
+        {errors?.photo?.message ? (
           <Form.Control.Feedback type="invalid" className=" pt-1">
-            {errors?.password?.message}
+            {errors?.photo?.message?.toString()}
           </Form.Control.Feedback>
         ) : null}
       </div>
@@ -156,7 +162,7 @@ function FormSignUp({ }: Props) {
         </button>
       </div>
       <div className='mt-3'>
-        <h5 className='text-center text-muted'>Already have an account? 
+        <h5 className='text-center text-muted'>Already have an account?
           <span className='text-primary ms-1'>
             <Link href='/auth/login'>Login</Link>
           </span>
