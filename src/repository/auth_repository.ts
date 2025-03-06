@@ -14,8 +14,10 @@ export class AuthRepository {
         }
       });
 
-      localStorage.setItem('user', JSON.stringify(response?.data));
-      localStorage.setItem('token', JSON.stringify(response?.token));
+      if(response) {
+        localStorage.setItem('user', JSON.stringify(response?.data));
+        localStorage.setItem('token', response?.token);
+      }
 
       return response;
     } catch (e) {

@@ -21,29 +21,27 @@ export default async function handler(
     const limit = parseInt((req.query.limit as string | undefined) ?? '10');
     const offset = parseInt((req.query.offset as string | undefined) ?? '0');
     const search = req.query.search as string | undefined;
+    let filters = [];
 
     const user = await prisma.users.findMany({
       skip: offset,
       take: limit,
       where: {
         OR: [
-          {
-            name: { contains: search },
-          },
-          {
-            email: { contains: search },
-          },
-          {
-            address: { contains: search },
-          },
-        ]
-      }
+          { name: { contains: search ?? '' } },
+          { email: { contains: search ?? '' } },
+          { address: { contains: search ?? '' } },
+        ],
+      },
     });
+
+    const count = await prisma.users.count();
 
     return res.status(200).send({
       code: 200,
       message: 'Sukses mengambil seluruh data user',
       data: user,
+      count: count
     });
   } catch (e) {
     return res.status(500).send({

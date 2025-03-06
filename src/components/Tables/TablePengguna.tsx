@@ -18,14 +18,14 @@ import {
   FilterFn,
 } from '@tanstack/react-table';
 import { useQuery } from '@tanstack/react-query';
-import { Alert, Button, Card, Form, Spinner, Table } from 'react-bootstrap';
-import { IPerson } from '@utils/interfaces';
-import { fetchDataPagination } from '@utils/dummyData/persons';
+import { Button, Card, Form, Spinner, Table } from 'react-bootstrap';
 import FeatherIcon from '@components/Icons/FeatherIcon';
 import Paginate from '@components/Paginate/Paginate';
 import DebouncedInput from '@components/Inputs/DebouncedInput';
 import { fuzzyFilter } from '@utils/utils';
 import { useRouter } from 'next/router';
+import { Users } from '@prisma/client';
+import { UserRepository } from '@/repository/user_repository';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -40,7 +40,7 @@ function TablePengguna({ }: Props) {
   const [globalFilter, setGlobalFilter] = React.useState('');
   const router = useRouter();
 
-  const columnsDefs = React.useMemo<ColumnDef<IPerson>[]>(
+  const columnsDefs = React.useMemo<ColumnDef<Users>[]>(
     () => [
       {
         accessorKey: 'id',
@@ -48,18 +48,15 @@ function TablePengguna({ }: Props) {
         size: 60,
       },
       {
-        accessorKey: 'firstName',
-        cell: (info) => info.getValue(),
+        accessorKey: 'name',
         header: () => <span>Nama</span>,
       },
       {
-        accessorFn: (row) => row.lastName,
-        id: 'lastName',
-        cell: (info) => info.getValue(),
+        accessorKey: 'email',
         header: () => <span>Email</span>,
       },
       {
-        accessorKey: 'age',
+        accessorKey: 'address',
         header: () => <span>Alamat</span>,
       },
       {
@@ -69,9 +66,6 @@ function TablePengguna({ }: Props) {
           <div className="d-flex gap-1">
             <Button size="sm" variant="primary">
               <FeatherIcon name="Edit" size={14} />
-            </Button>
-            <Button size="sm" variant="info">
-              <FeatherIcon name="Info" size={14} />
             </Button>
             <Button size="sm" variant="danger">
               <FeatherIcon name="Trash" size={14} />
@@ -102,7 +96,7 @@ function TablePengguna({ }: Props) {
 
   const dataQuery = useQuery(
     ['data', fetchDataOptions],
-    () => fetchDataPagination(fetchDataOptions),
+    () => UserRepository.getUsers({limit: fetchDataOptions.pageSize, offset: fetchDataOptions.pageIndex, search: fetchDataOptions.searchTerm}),
     { keepPreviousData: true }
   );
 
@@ -117,9 +111,9 @@ function TablePengguna({ }: Props) {
   );
 
   const table = useReactTable({
-    data: dataQuery?.data?.rows ?? defaultData,
+    data: dataQuery?.data?.data ?? defaultData,
     columns: columnsDefs,
-    pageCount: dataQuery?.data?.pageCount ?? -1,
+    pageCount: dataQuery?.data?.count ?? -1,
     state: {
       pagination,
       sorting,
@@ -157,7 +151,7 @@ function TablePengguna({ }: Props) {
         <Card.Header>
           <div className='d-flex align-items-center justify-content-between'>
             <Card.Title className="mb-0">Tabel Pengguna</Card.Title>
-            <Button onClick={() => router.push('/user/add')}>Tambah Pengguna</Button>
+            {/* <Button onClick={() => router.push('/user/add')}>Tambah Pengguna</Button> */}
           </div>
         </Card.Header>
         <Card.Body className="pb-1 table-responsive ">
@@ -334,7 +328,7 @@ function TablePengguna({ }: Props) {
                 {table.getState().pagination.pageIndex + 1} to{' '}
                 {table.getPageCount()}
               </strong>{' '}
-              of {dataQuery?.data?.totalEntries} |
+              of {dataQuery?.data?.count ?? 0} |
               <span>Result {table.getRowModel().rows.length} Rows</span>
             </div>
           </div>

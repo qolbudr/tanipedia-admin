@@ -3,10 +3,20 @@ import React from 'react';
 import * as Icon from 'react-feather';
 import { Dropdown, NavItem } from 'react-bootstrap';
 import DropdownToggle from '../DropdownToggle';
+import { useAuthContext } from '@utils/context/AuthContext';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
-function DropdownUserProfile({}: Props) {
+function DropdownUserProfile({ }: Props) {
+  const auth = useAuthContext();
+  const router = useRouter();
+
+  const logout = () => {
+    localStorage.clear();
+    router.replace('/auth/login');
+  }
+
   return (
     <Dropdown as={NavItem}>
       <Dropdown.Toggle
@@ -22,11 +32,11 @@ function DropdownUserProfile({}: Props) {
         className="nav-link d-none d-sm-inline-block"
       >
         <img
-          src="/img/avatars/avatar.jpg"
-          className="avatar img-fluid rounded me-1"
+          src={`avatar/${auth?.user?.photo}`}
+          className="avatar img-fluid rounded-circle me-2"
           alt="Charles Hall"
         />{' '}
-        <span className="text-dark me-1">Charles Hall</span>
+        <span className="text-dark me-1">{auth.user?.name}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu
         className="dropdown-menu-end mt-3"
@@ -48,7 +58,7 @@ function DropdownUserProfile({}: Props) {
           Center
         </Dropdown.Item>
         <div className="dropdown-divider" />
-        <Dropdown.Item href="/#">Log out</Dropdown.Item>
+        <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

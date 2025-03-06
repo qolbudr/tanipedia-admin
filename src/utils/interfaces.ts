@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextRequest } from 'next/server';
 import { FeatherIconsTypes, ThemeTypes } from './types';
+import { JwtPayload } from 'jsonwebtoken';
 
 export interface INotification {
   id: string;
@@ -38,4 +40,8 @@ export interface IPerson {
   progress: number;
   status: 'relationship' | 'complicated' | 'single';
   createdAt: Date;
+}
+
+export interface IDecodedJwt extends NextRequest {
+  user: string | JwtPayload;
 }

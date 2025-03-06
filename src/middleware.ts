@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import * as jose from 'jose'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   if(request.nextUrl.pathname.startsWith('/api')) 
   {
     const token = request.headers.get('Authorization');
@@ -9,7 +9,8 @@ export function middleware(request: NextRequest) {
 
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-      jose.jwtVerify(token, secret);
+      const user = await jose.jwtVerify(token, secret);
+      request.headers.append('user', user.payload!.jti!);
       return NextResponse.next()
     } catch (error) {
       return NextResponse.json({ message: 'Token tidak valid', code: 403 }, { status: 403 });

@@ -70,16 +70,6 @@ const navigationConfigs: INavigation = {
       },
     ],
   },
-  misc: {
-    title: 'Misc',
-    navItems: [
-      {
-        name: 'Logout',
-        icon: 'LogOut',
-        href: '/logout',
-      },
-    ],
-  },
   toolsComponents: {
     title: 'Tools & Components',
     navItems: [
