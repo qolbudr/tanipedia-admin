@@ -1,3 +1,4 @@
+import { GuestCtxProvider } from '@utils/context/GuestContext';
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
@@ -7,9 +8,11 @@ type Props = {
 
 function AuthLayout({ children }: Props) {
   return (
-    <main className="d-flex w-100 bg-bg-light ">
-      <Container className=" d-flex flex-column">{children}</Container>
-    </main>
+    <GuestCtxProvider>
+      <main className="d-flex w-100 bg-bg-light ">
+        <Container className=" d-flex flex-column">{children}</Container>
+      </main>
+    </GuestCtxProvider>
   );
 }
 

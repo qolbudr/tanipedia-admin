@@ -1,4 +1,4 @@
-import Custom404 from "@/pages/404";
+import Loader from "@/pages/loader";
 import { Users } from "@prisma/client";
 import { useRouter } from "next/router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
@@ -60,7 +60,7 @@ export function AuthCtxProvider({ children }: Props) {
   return <>
     <AuthLayout.Provider value={{ user: user, isLoading: isLoading }}>
       {
-        isLoading ? <Custom404 /> :
+        isLoading ? <Loader /> :
           children
       }
     </AuthLayout.Provider>
