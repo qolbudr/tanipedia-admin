@@ -48,6 +48,7 @@
     "eslint-config-next": "13.2.4",
     "flatpickr": "^4.6.13",
     "formidable": "^3.5.2",
+    "jose": "^6.0.8",
     "jquery": "^3.6.4",
     "jsonwebtoken": "^9.0.2",
     "jsvectormap": "^1.5.1",
