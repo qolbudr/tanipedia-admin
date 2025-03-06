@@ -4,18 +4,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInInputTypes, signInSchema } from '@utils/schema/authSchema';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 type Props = {};
 
-function FormSignIn({}: Props) {
+function FormSignIn({ }: Props) {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
   const methods = useForm<SignInInputTypes>({
     resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: 'adminkit@adminkit.io',
-    },
+    defaultValues: {},
   });
 
   const {
@@ -71,9 +70,6 @@ function FormSignIn({}: Props) {
             {errors?.password?.message}
           </Form.Control.Feedback>
         ) : null}
-        <small>
-          <a href="index.html">Forgot password?</a>
-        </small>
       </div>
       <div>
         <label className="form-check">
@@ -90,12 +86,19 @@ function FormSignIn({}: Props) {
       <div className="text-center mt-3">
         <button
           type="submit"
-          className="btn btn-lg btn-primary"
+          className="btn btn-lg btn-primary w-100"
           disabled={loading}
         >
           Sign in
         </button>
         {/* <button type="submit" class="btn btn-lg btn-primary">Sign in</button> */}
+      </div>
+      <div className='mt-3'>
+        <h5 className='text-center text-muted'>Dont have an account? 
+          <span className='text-primary ms-1'>
+            <Link href='/auth/signup'>Sign Up</Link>
+          </span>
+        </h5>
       </div>
     </Form>
   );

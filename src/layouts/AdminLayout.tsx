@@ -4,30 +4,24 @@ import React from 'react';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import { AuthCtxProvider } from '@utils/context/AuthContext';
 
 type Props = {
   children: React.ReactNode;
 };
 
 function AdminLayout({ children }: Props) {
-  React.useEffect(() => {
-    const __nextEL = document.getElementById('__next') as HTMLDivElement;
-    __nextEL.classList.add('wrapper');
-
-    return () => {
-      __nextEL.classList.remove('wrapper');
-    };
-  }, []);
-
   return (
     <>
-      <Sidebar />
-      <div className="main">
-        <Navbar />
-        <main className="content">{children}</main>
-        {/* Footer */}
-        <Footer />
-      </div>
+      <AuthCtxProvider>
+        <Sidebar />
+        <div className="main">
+          <Navbar />
+          <main className="content">{children}</main>
+          {/* Footer */}
+          <Footer />
+        </div>
+      </AuthCtxProvider>
     </>
   );
 }

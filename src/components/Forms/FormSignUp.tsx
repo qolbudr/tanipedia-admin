@@ -1,13 +1,14 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpInputTypes, signUpSchema } from '@utils/schema/authSchema';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 type Props = {};
 
-function FormSignUp({}: Props) {
+function FormSignUp({ }: Props) {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -58,22 +59,6 @@ function FormSignUp({}: Props) {
         ) : null}
       </div>
       <div className="mb-3">
-        <Form.Label htmlFor="company">Company</Form.Label>
-        <Form.Control
-          size="lg"
-          type="text"
-          id="company"
-          placeholder="Enter your company name"
-          isInvalid={!!errors?.company}
-          {...register('company')}
-        />
-        {errors?.company?.message ? (
-          <Form.Control.Feedback type="invalid" className=" pt-1">
-            {errors?.company?.message}
-          </Form.Control.Feedback>
-        ) : null}
-      </div>
-      <div className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
           size="lg"
@@ -106,14 +91,76 @@ function FormSignUp({}: Props) {
           </Form.Control.Feedback>
         ) : null}
       </div>
+      <div className="mb-3">
+        <Form.Label htmlFor="password">Phone</Form.Label>
+        <InputGroup className="mb-3">
+          <InputGroup.Text>{"+62"}</InputGroup.Text>
+          <Form.Control
+            size="lg"
+            type="textarea"
+            id="password"
+            placeholder="Enter password"
+            isInvalid={!!errors?.password}
+            autoComplete="on"
+            {...register('password')}
+          />
+        </InputGroup>
+        {errors?.password?.message ? (
+          <Form.Control.Feedback type="invalid" className=" pt-1">
+            {errors?.password?.message}
+          </Form.Control.Feedback>
+        ) : null}
+      </div>
+      <div className="mb-3">
+        <Form.Label htmlFor="password">Alamat</Form.Label>
+        <Form.Control
+          as="textarea"
+          size="lg"
+          type="textarea"
+          id="password"
+          placeholder="Enter password"
+          isInvalid={!!errors?.password}
+          autoComplete="on"
+          {...register('password')}
+        />
+        {errors?.password?.message ? (
+          <Form.Control.Feedback type="invalid" className=" pt-1">
+            {errors?.password?.message}
+          </Form.Control.Feedback>
+        ) : null}
+      </div>
+      <div className="mb-3">
+        <Form.Label htmlFor="password">Photo</Form.Label>
+        <Form.Control
+          size="lg"
+          type="file"
+          id="password"
+          placeholder="Enter password"
+          isInvalid={!!errors?.password}
+          autoComplete="on"
+          {...register('password')}
+        />
+        {errors?.password?.message ? (
+          <Form.Control.Feedback type="invalid" className=" pt-1">
+            {errors?.password?.message}
+          </Form.Control.Feedback>
+        ) : null}
+      </div>
       <div className="text-center mt-3">
         <button
           type="submit"
-          className="btn btn-lg btn-primary"
+          className="btn btn-lg btn-primary w-100"
           disabled={loading}
         >
           Sign up
         </button>
+      </div>
+      <div className='mt-3'>
+        <h5 className='text-center text-muted'>Already have an account? 
+          <span className='text-primary ms-1'>
+            <Link href='/auth/login'>Login</Link>
+          </span>
+        </h5>
       </div>
     </Form>
   );

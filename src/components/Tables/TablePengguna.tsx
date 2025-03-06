@@ -25,6 +25,7 @@ import FeatherIcon from '@components/Icons/FeatherIcon';
 import Paginate from '@components/Paginate/Paginate';
 import DebouncedInput from '@components/Inputs/DebouncedInput';
 import { fuzzyFilter } from '@utils/utils';
+import { useRouter } from 'next/router';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -37,6 +38,7 @@ type Props = {};
 function TablePengguna({ }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState('');
+  const router = useRouter();
 
   const columnsDefs = React.useMemo<ColumnDef<IPerson>[]>(
     () => [
@@ -155,7 +157,7 @@ function TablePengguna({ }: Props) {
         <Card.Header>
           <div className='d-flex align-items-center justify-content-between'>
             <Card.Title className="mb-0">Tabel Pengguna</Card.Title>
-            <Button>Tambah Pengguna</Button>
+            <Button onClick={() => router.push('/user/add')}>Tambah Pengguna</Button>
           </div>
         </Card.Header>
         <Card.Body className="pb-1 table-responsive ">

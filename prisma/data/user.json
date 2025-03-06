@@ -1,0 +1,20 @@
+[
+  {
+      "email": "admin@tanipedia.id",
+      "name": "Administrator",
+      "role": "admin",
+      "password": "",
+      "phone": "81111111111",
+      "address": "Jl. Lidah Wetan, Lidah Wetan, Kec. Lakarsantri, kota Surabaya, Jawa Timur 60213",
+      "photo": "admin-avatar.jpg"
+  },
+  {
+      "email": "seller@tanipedia.id",
+      "name": "Seller",
+      "role": "seller",
+      "password": "",
+      "phone": "81111111111",
+      "address": "Jl. Lidah Wetan, Lidah Wetan, Kec. Lakarsantri, kota Surabaya, Jawa Timur 60213",
+      "photo": "seller-avatar.jpg"
+  }
+]

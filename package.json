@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "db-seed": "prisma db seed"
   },
   "browserslist": [
     "> 0.5%",
@@ -22,8 +23,12 @@
     "Android >= 6",
     "not Explorer <= 11"
   ],
+  "prisma": {
+    "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
+    "@prisma/client": "^5.22.0",
     "@react-jvectormap/core": "^1.0.4",
     "@react-jvectormap/world": "^1.1.2",
     "@tanstack/match-sorter-utils": "^8.7.6",
@@ -36,14 +41,18 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-simple-maps": "^3.0.0",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.2.3",
     "chart.js": "2.9.4",
     "date-fns": "^2.29.3",
     "eslint-config-next": "13.2.4",
     "flatpickr": "^4.6.13",
+    "formidable": "^3.5.2",
     "jquery": "^3.6.4",
+    "jsonwebtoken": "^9.0.2",
     "jsvectormap": "^1.5.1",
     "next": "13.2.4",
+    "prisma": "^5.21.1",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
@@ -53,12 +62,16 @@
     "react-simple-maps": "^3.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "simplebar-react": "^3.2.2",
+    "ts-node": "^10.9.2",
     "typescript": "5.0.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "@next/eslint-plugin-next": "^13.2.4",
+    "@types/bcrypt": "^5.0.2",
+    "@types/formidable": "^3.4.5",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/react-syntax-highlighter": "^15.5.6",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
