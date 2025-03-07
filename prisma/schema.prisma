@@ -31,3 +31,22 @@ enum Role {
   admin
   seller
 }
+
+model Video {
+  id                    Int               @id @default(autoincrement())
+  title                 String
+  description           String            
+  link                  String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now())
+}
+
+model Article {
+  id                    Int               @id @default(autoincrement())
+  title                 String
+  description           String            
+  content               String            @db.LongText
+  image                 String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now())
+}

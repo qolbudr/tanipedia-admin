@@ -24,13 +24,17 @@ import Paginate from '@components/Paginate/Paginate';
 import DebouncedInput from '@components/Inputs/DebouncedInput';
 import { fuzzyFilter } from '@utils/utils';
 import { useRouter } from 'next/router';
-import { Users } from '@prisma/client';
+import { Article, Users } from '@prisma/client';
 import { UserRepository } from '@/repository/user_repository';
 import useNotification from '@hooks/useNotification';
 import { handleError } from '@utils/handleError';
 import Swal from 'sweetalert2';
 import { ModalBootstrap } from '@components/Modal/Modal';
 import FormEditPengguna from '@components/Forms/FormEditPengguna';
+import { ArticleRepository } from '@/repository/article_repository';
+import Image from 'next/image';
+import FormAddArtikel from '@components/Forms/FormAddArtikel';
+import FormEditArtikel from '@components/Forms/FormEditArtikel';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -40,15 +44,16 @@ declare module '@tanstack/table-core' {
 
 type Props = {};
 
-function TablePengguna({ }: Props) {
+function TableArtikel({ }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState('');
   const router = useRouter();
   const notification = useNotification({ duration: 500 });
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [user, setUser] = useState<Users>()
+  const [isAdd, setIsAdd] = useState<boolean>(false);
+  const [article, setArticle] = useState<Article>()
 
-  const columnsDefs = React.useMemo<ColumnDef<Users>[]>(
+  const columnsDefs = React.useMemo<ColumnDef<Article>[]>(
     () => [
       {
         accessorKey: 'id',
@@ -56,21 +61,17 @@ function TablePengguna({ }: Props) {
         size: 60,
       },
       {
-        accessorKey: 'name',
-        header: () => <span>Nama</span>,
+        accessorKey: 'image',
+        header: () => <span>Gambar</span>,
+        cell: (data) => <Image style={{objectFit: 'cover'}} width={100} height={100} src={`/article/${data.row.original.image}`} alt={data.row.original.image}/>
       },
       {
-        accessorKey: 'email',
-        header: () => <span>Email</span>,
+        accessorKey: 'title',
+        header: () => <span>Judul</span>,
       },
       {
-        accessorKey: 'phone',
-        header: () => <span>Telepon</span>,
-        cell: (data) => '+62' + data.row.original.phone
-      },
-      {
-        accessorKey: 'address',
-        header: () => <span>Alamat</span>,
+        accessorKey: 'description',
+        header: () => <span>Deskripsi</span>,
       },
       {
         accessorKey: 'action',
@@ -91,17 +92,17 @@ function TablePengguna({ }: Props) {
     []
   );
 
-  const editUser = async (userId: number) => {
+  const editUser = async (articleId: number) => {
     try {
-      const response = await UserRepository.editUser({ id: `${userId}` })
-      setUser(response?.data);
+      const response = await ArticleRepository.editArticle({ id: `${articleId}` })
+      setArticle(response?.data);
       setIsEdit(true);
     } catch (e) {
       notification.danger(handleError(e));
     }
   }
 
-  const deleteUser = async (userId: number) => {
+  const deleteUser = async (articleId: number) => {
     try {
       Swal.fire({
         icon: "warning",
@@ -111,7 +112,7 @@ function TablePengguna({ }: Props) {
         cancelButtonText: "Tidak"
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const response = await UserRepository.deleteUser({ id: `${userId}` });
+          const response = await ArticleRepository.deleteArticle({ id: `${articleId}` });
           if (response) notification.success(response.message);
           await dataQuery.refetch();
         }
@@ -139,7 +140,7 @@ function TablePengguna({ }: Props) {
 
   const dataQuery = useQuery(
     ['data', fetchDataOptions],
-    () => UserRepository.getUsers({ limit: fetchDataOptions.pageSize, offset: fetchDataOptions.pageIndex, search: fetchDataOptions.searchTerm }),
+    () => ArticleRepository.getArticles({ limit: fetchDataOptions.pageSize, offset: fetchDataOptions.pageIndex, search: fetchDataOptions.searchTerm }),
     { keepPreviousData: true }
   );
 
@@ -190,24 +191,36 @@ function TablePengguna({ }: Props) {
 
   return (
     <>
-      {user && (
+      {article && (
         <ModalBootstrap
           show={isEdit}
           title='Edit Pengguna'
-          size='sm'
+          size='md'
           close={() => setIsEdit(false)}
         >
-          <FormEditPengguna user={user} callback={() => {
+          <FormEditArtikel article={article} callback={() => {
             dataQuery.refetch();
             setIsEdit(false);
           }} />
         </ModalBootstrap>
       )}
+
+      <ModalBootstrap
+        show={isAdd}
+        title="Tambah Artikel"
+        size="md"
+        close={() => setIsAdd(false) }
+        >
+          <FormAddArtikel callback={() => {
+            dataQuery.refetch();
+            setIsAdd(false);
+          }}/>
+      </ModalBootstrap>
       <Card>
         <Card.Header>
           <div className='d-flex align-items-center justify-content-between'>
-            <Card.Title className="mb-0">Tabel Pengguna</Card.Title>
-            {/* <Button onClick={() => router.push('/user/add')}>Tambah Pengguna</Button> */}
+            <Card.Title className="mb-0">Tabel Artikel</Card.Title>
+            <Button onClick={() => setIsAdd(true)}>Tambah Artikel</Button>
           </div>
         </Card.Header>
         <Card.Body className="pb-1 table-responsive ">
@@ -418,4 +431,4 @@ function TablePengguna({ }: Props) {
   );
 }
 
-export default TablePengguna;
+export default TableArtikel;

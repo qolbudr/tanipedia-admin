@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 const userData: Array<any> = require('./data/user.json');
+const articleData: Array<any> = require('./data/article.json');
 
 const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
@@ -15,6 +16,11 @@ async function main() {
     let element = userData[i];
     element.password = password;
     await prisma.users.create({ data: element });
+  }
+
+  for (let i = 0; i < articleData.length; i++) {
+    let element = articleData[i];
+    await prisma.article.create({ data: element });
   }
 }
 
