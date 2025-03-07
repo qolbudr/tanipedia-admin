@@ -5,6 +5,7 @@ import { Dropdown, NavItem } from 'react-bootstrap';
 import DropdownToggle from '../DropdownToggle';
 import { useAuthContext } from '@utils/context/AuthContext';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 
 type Props = {};
 
@@ -13,8 +14,18 @@ function DropdownUserProfile({ }: Props) {
   const router = useRouter();
 
   const logout = () => {
-    localStorage.clear();
-    router.replace('/auth/login');
+    Swal.fire({
+      icon: "question",
+      title: "Apakah kamu yakin ingin keluar?",
+      showCancelButton: true,
+      confirmButtonText: "Ya",
+      cancelButtonText: "Tidak"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        router.replace('/auth/login');
+      }
+    });
   }
 
   return (
@@ -32,7 +43,7 @@ function DropdownUserProfile({ }: Props) {
         className="nav-link d-none d-sm-inline-block"
       >
         <img
-          src={`avatar/${auth?.user?.photo}`}
+          src={`${location.origin}/avatar/${auth?.user?.photo}`}
           className="avatar img-fluid rounded-circle me-2"
           alt="Charles Hall"
         />{' '}

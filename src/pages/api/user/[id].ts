@@ -18,18 +18,13 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id: string = req.query.id as string;
-  const data = await req.body();
-
-  if (data.password) {
-    const hash = await bcrypt.hash(data.password, 8);
-    data.password = hash;
-  }
+  const data = await req.body;
 
   const user = await prisma.users.update({
     where: { id: parseInt(id) },
     data: data,
   });
-  return NextResponse.json({
+  return res.status(200).send({
     code: 200,
     message: 'Sukses memperbarui data user',
     data: user,
@@ -39,7 +34,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 const deleteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id: string = req.query.id as string;
   const user = await prisma.users.delete({ where: { id: parseInt(id) } });
-  return NextResponse.json({
+  return res.status(200).send({
     code: 200,
     message: 'Sukses menghapus data user',
     data: user,

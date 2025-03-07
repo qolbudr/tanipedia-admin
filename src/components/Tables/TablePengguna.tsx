@@ -3,7 +3,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-unstable-nested-components */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -18,7 +18,7 @@ import {
   FilterFn,
 } from '@tanstack/react-table';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Card, Form, Spinner, Table } from 'react-bootstrap';
+import { Button, Card, Form, Modal, Spinner, Table } from 'react-bootstrap';
 import FeatherIcon from '@components/Icons/FeatherIcon';
 import Paginate from '@components/Paginate/Paginate';
 import DebouncedInput from '@components/Inputs/DebouncedInput';
@@ -26,6 +26,11 @@ import { fuzzyFilter } from '@utils/utils';
 import { useRouter } from 'next/router';
 import { Users } from '@prisma/client';
 import { UserRepository } from '@/repository/user_repository';
+import useNotification from '@hooks/useNotification';
+import { handleError } from '@utils/handleError';
+import Swal from 'sweetalert2';
+import { ModalBootstrap } from '@components/Modal/Modal';
+import FormEditPengguna from '@components/Forms/FormEditPengguna';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -39,6 +44,9 @@ function TablePengguna({ }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState('');
   const router = useRouter();
+  const notification = useNotification({ duration: 500 });
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [user, setUser] = useState<Users>()
 
   const columnsDefs = React.useMemo<ColumnDef<Users>[]>(
     () => [
@@ -56,18 +64,23 @@ function TablePengguna({ }: Props) {
         header: () => <span>Email</span>,
       },
       {
+        accessorKey: 'phone',
+        header: () => <span>Telepon</span>,
+        cell: (data) => '+62' + data.row.original.phone
+      },
+      {
         accessorKey: 'address',
         header: () => <span>Alamat</span>,
       },
       {
         accessorKey: 'action',
         header: '',
-        cell: () => (
+        cell: (data) => (
           <div className="d-flex gap-1">
-            <Button size="sm" variant="primary">
+            <Button size="sm" onClick={() => editUser(data.row.original.id)} variant="primary">
               <FeatherIcon name="Edit" size={14} />
             </Button>
-            <Button size="sm" variant="danger">
+            <Button size="sm" onClick={() => deleteUser(data.row.original.id)} variant="danger">
               <FeatherIcon name="Trash" size={14} />
             </Button>
           </div>
@@ -77,6 +90,36 @@ function TablePengguna({ }: Props) {
     ],
     []
   );
+
+  const editUser = async (userId: number) => {
+    try {
+      const response = await UserRepository.editUser({ id: `${userId}` })
+      setUser(response?.data);
+      setIsEdit(true);
+    } catch (e) {
+      notification.danger(handleError(e));
+    }
+  }
+
+  const deleteUser = async (userId: number) => {
+    try {
+      Swal.fire({
+        icon: "warning",
+        title: "Apakah kamu yakin ingin menghapus data",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await UserRepository.deleteUser({ id: `${userId}` });
+          if (response) notification.success(response.message);
+          await dataQuery.refetch();
+        }
+      });
+    } catch (e) {
+      notification.danger(handleError(e));
+    }
+  }
 
   const [{ pageIndex, pageSize }, setPagination] =
     React.useState<PaginationState>({
@@ -96,7 +139,7 @@ function TablePengguna({ }: Props) {
 
   const dataQuery = useQuery(
     ['data', fetchDataOptions],
-    () => UserRepository.getUsers({limit: fetchDataOptions.pageSize, offset: fetchDataOptions.pageIndex, search: fetchDataOptions.searchTerm}),
+    () => UserRepository.getUsers({ limit: fetchDataOptions.pageSize, offset: fetchDataOptions.pageIndex, search: fetchDataOptions.searchTerm }),
     { keepPreviousData: true }
   );
 
@@ -147,6 +190,19 @@ function TablePengguna({ }: Props) {
 
   return (
     <>
+      {user && (
+        <ModalBootstrap
+          show={isEdit}
+          title='Edit Pengguna'
+          size='sm'
+          close={() => setIsEdit(false)}
+        >
+          <FormEditPengguna user={user} callback={() => {
+            dataQuery.refetch();
+            setIsEdit(false);
+          }} />
+        </ModalBootstrap>
+      )}x
       <Card>
         <Card.Header>
           <div className='d-flex align-items-center justify-content-between'>
@@ -221,8 +277,8 @@ function TablePengguna({ }: Props) {
                           <div
                             {...{
                               className: ` d-flex align-items-center justify-content-between ${header.column.getCanSort()
-                                  ? 'cursor-pointer select-none'
-                                  : ''
+                                ? 'cursor-pointer select-none'
+                                : ''
                                 }`,
                               onClick: header.column.getToggleSortingHandler(),
                             }}

@@ -63,6 +63,7 @@
     "react-simple-maps": "^3.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "simplebar-react": "^3.2.2",
+    "sweetalert2": "^11.17.2",
     "ts-node": "^10.9.2",
     "typescript": "5.0.2",
     "zod": "^3.21.4"
