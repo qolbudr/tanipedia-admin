@@ -39,6 +39,10 @@ const navigationConfigs: INavigation = {
         icon: 'Book',
         navSubItems: [
           {
+            name: 'Kategori Video',
+            href: '/edukasi/video-category',
+          },
+          {
             name: 'Video',
             href: '/edukasi/video',
           },
