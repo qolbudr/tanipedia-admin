@@ -32,11 +32,22 @@ enum Role {
   seller
 }
 
-model Video {
+model VideoCategory {
   id                    Int               @id @default(autoincrement())
+  title                 String
+  description           String
+  video                 Video[]
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now())
+}
+
+model Video {
+  id                    Int               @id @default(autoincrement())              
   title                 String
   description           String            
   link                  String
+  category              VideoCategory     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId            Int
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @default(now())
 }
