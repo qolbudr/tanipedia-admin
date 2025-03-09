@@ -21,6 +21,7 @@ interface INavigationItem {
 interface INavigation {
   [key: string]: {
     title: string;
+    role: 'seller' | 'admin';
     navItems: INavigationItem[];
   };
 }
@@ -28,6 +29,7 @@ interface INavigation {
 const navigationConfigs: INavigation = {
   pages: {
     title: 'Master Data',
+    role: 'admin',
     navItems: [
       {
         name: 'Pengguna',
@@ -61,6 +63,7 @@ const navigationConfigs: INavigation = {
   },
   sellerPage: {
     title: 'Seller',
+    role: 'seller',
     navItems: [
       {
         name: 'Produk',

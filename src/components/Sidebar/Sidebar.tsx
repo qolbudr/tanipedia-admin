@@ -9,12 +9,14 @@ import SidebarHeader from './SidebarHeader';
 import SidebarItem from './SidebarItem';
 import SidebarItemCollapse from './SidebarItemCollapse';
 import SidebarCta from './SidebarCta';
+import { useAuthContext } from '@utils/context/AuthContext';
 
 type Props = {};
 
 export default function Sidebar({}: Props) {
   const scrollableNodeRef = React.createRef<any>();
   const ref = React.useRef<any>();
+  const auth = useAuthContext();
 
   const { openSidebar } = useAdminLayoutContext();
 
@@ -34,7 +36,7 @@ export default function Sidebar({}: Props) {
       >
         <SidebarBrand />
         <ul className="sidebar-nav">
-          {Object.keys(navigationConfigs).map((key) => {
+          {Object.keys(navigationConfigs).filter((key) => navigationConfigs[key].role === auth.user?.role).map((key) => {
             return (
               <React.Fragment key={key}>
                 <SidebarHeader title={navigationConfigs[key].title} />
