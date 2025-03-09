@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, ProductCategory } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
@@ -18,6 +18,7 @@ export default async function handler(
     const limit = parseInt((req.query.limit as string | undefined) ?? '10');
     const offset = parseInt((req.query.offset as string | undefined) ?? '0');
     const search = req.query.search as string | undefined;
+    const category = req.query.category as string | undefined;
     let filters = [];
 
     const product = await prisma.product.findMany({
@@ -30,6 +31,7 @@ export default async function handler(
         OR: [
           { name: { contains: search ?? '' } },
           { description: { contains: search ?? '' } },
+          { category: { equals: category as ProductCategory } },
           {
             seller: {
               address: { contains: search ?? '' }
