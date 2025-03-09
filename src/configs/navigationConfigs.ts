@@ -55,7 +55,7 @@ const navigationConfigs: INavigation = {
       {
         name: 'Pohon Dana',
         icon: 'Info',
-        href: '/master-pohon-dana',
+        href: '/pohon-dana',
       },
     ],
   },
@@ -65,116 +65,116 @@ const navigationConfigs: INavigation = {
       {
         name: 'Produk',
         icon: 'Book',
-        href: '/master-edukasi',
+        href: '/produk',
       },
-      {
-        name: 'Pohon Dana',
-        icon: 'Info',
-        href: '/master-pohon-dana',
-      },
+      // {
+      //   name: 'Pohon Dana',
+      //   icon: 'Info',
+      //   href: '/master-pohon-dana',
+      // },
     ],
   },
-  toolsComponents: {
-    title: 'Tools & Components',
-    navItems: [
-      {
-        name: 'Auth',
-        icon: 'Users',
-        navSubItems: [
-          {
-            name: 'Sign In',
-            href: '/pages-sign-in',
-          },
-          {
-            name: 'Sign Up',
-            href: '/pages-sign-up',
-          },
-        ],
-      },
-      {
-        name: 'Blank',
-        icon: 'Book',
-        href: '/pages-blank',
-      },
-      {
-        name: 'UI Elements',
-        icon: 'Briefcase',
-        navSubItems: [
-          {
-            name: 'Alerts',
-            href: '/ui-alerts',
-            badge: 'Soon',
-            disabled: true,
-          },
-          {
-            name: 'Buttons',
-            href: '/ui-buttons',
-            badge: 'Soon',
-            disabled: true,
-          },
-          {
-            name: 'Cards',
-            href: '/ui-cards',
-            badge: 'Soon',
-            disabled: true,
-          },
-        ],
-      },
-      {
-        name: 'Forms',
-        icon: 'CheckSquare',
-        badge: 'Soon',
-        disabled: true,
-        href: '/ui-forms',
-      },
-      {
-        name: 'Icons',
-        icon: 'Coffee',
+  // toolsComponents: {
+  //   title: 'Tools & Components',
+  //   navItems: [
+  //     {
+  //       name: 'Auth',
+  //       icon: 'Users',
+  //       navSubItems: [
+  //         {
+  //           name: 'Sign In',
+  //           href: '/pages-sign-in',
+  //         },
+  //         {
+  //           name: 'Sign Up',
+  //           href: '/pages-sign-up',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: 'Blank',
+  //       icon: 'Book',
+  //       href: '/pages-blank',
+  //     },
+  //     {
+  //       name: 'UI Elements',
+  //       icon: 'Briefcase',
+  //       navSubItems: [
+  //         {
+  //           name: 'Alerts',
+  //           href: '/ui-alerts',
+  //           badge: 'Soon',
+  //           disabled: true,
+  //         },
+  //         {
+  //           name: 'Buttons',
+  //           href: '/ui-buttons',
+  //           badge: 'Soon',
+  //           disabled: true,
+  //         },
+  //         {
+  //           name: 'Cards',
+  //           href: '/ui-cards',
+  //           badge: 'Soon',
+  //           disabled: true,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: 'Forms',
+  //       icon: 'CheckSquare',
+  //       badge: 'Soon',
+  //       disabled: true,
+  //       href: '/ui-forms',
+  //     },
+  //     {
+  //       name: 'Icons',
+  //       icon: 'Coffee',
 
-        href: '/ui-feather',
-      },
-    ],
-  },
-  pluginsAddons: {
-    title: 'Plugins & Addons',
-    navItems: [
-      {
-        name: 'Notification',
-        icon: 'Bell',
-        href: '/notification',
-      },
-      {
-        name: 'Table',
-        icon: 'List',
-        href: '/tables-react',
-      },
-      {
-        name: 'Charts',
-        icon: 'BarChart2',
-        href: '/charts-chartjs',
-        badge: 'Soon',
-        disabled: true,
-      },
-      {
-        name: 'Map',
-        icon: 'Map',
-        navSubItems: [
-          {
-            name: 'Google Map',
-            href: '/map-google',
-            badge: 'Soon',
-            disabled: true,
-          },
-          {
-            name: 'JVectorMap',
-            href: '/map-jvectormap',
-            badge: 'Soon',
-            disabled: true,
-          },
-        ],
-      },
-    ],
-  },
+  //       href: '/ui-feather',
+  //     },
+  //   ],
+  // },
+  // pluginsAddons: {
+  //   title: 'Plugins & Addons',
+  //   navItems: [
+  //     {
+  //       name: 'Notification',
+  //       icon: 'Bell',
+  //       href: '/notification',
+  //     },
+  //     {
+  //       name: 'Table',
+  //       icon: 'List',
+  //       href: '/tables-react',
+  //     },
+  //     {
+  //       name: 'Charts',
+  //       icon: 'BarChart2',
+  //       href: '/charts-chartjs',
+  //       badge: 'Soon',
+  //       disabled: true,
+  //     },
+  //     {
+  //       name: 'Map',
+  //       icon: 'Map',
+  //       navSubItems: [
+  //         {
+  //           name: 'Google Map',
+  //           href: '/map-google',
+  //           badge: 'Soon',
+  //           disabled: true,
+  //         },
+  //         {
+  //           name: 'JVectorMap',
+  //           href: '/map-jvectormap',
+  //           badge: 'Soon',
+  //           disabled: true,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 };
 
 export default navigationConfigs;

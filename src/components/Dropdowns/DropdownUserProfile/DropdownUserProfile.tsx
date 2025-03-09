@@ -56,7 +56,7 @@ function DropdownUserProfile({ }: Props) {
         <Dropdown.Item href="pages-profile.html">
           <Icon.User className="align-middle me-1" size={18} /> Profile
         </Dropdown.Item>
-        <Dropdown.Item href="/#">
+        {/* <Dropdown.Item href="/#">
           <Icon.PieChart className="align-middle me-1" size={18} /> Analytics
         </Dropdown.Item>
         <div className="dropdown-divider" />
@@ -67,7 +67,7 @@ function DropdownUserProfile({ }: Props) {
         <Dropdown.Item href="/#">
           <Icon.HelpCircle className="align-middle me-1" size={18} /> Help
           Center
-        </Dropdown.Item>
+        </Dropdown.Item> */}
         <div className="dropdown-divider" />
         <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
       </Dropdown.Menu>

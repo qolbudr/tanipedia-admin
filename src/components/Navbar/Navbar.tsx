@@ -22,7 +22,7 @@ function Navbar() {
       </a>
       <BsNavbar.Collapse>
         <Nav className="navbar-align">
-          <DropdownNotification />
+          {/* <DropdownNotification /> */}
           <DropdownUserProfile />
         </Nav>
       </BsNavbar.Collapse>
