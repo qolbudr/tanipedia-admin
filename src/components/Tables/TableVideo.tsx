@@ -3,7 +3,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -57,6 +57,7 @@ function TableVideo({ }: Props) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const [video, setVideo] = useState<Video>()
+  const [countCategory, setCountCategory] = useState<number>(0);
 
   const columnsDefs = React.useMemo<ColumnDef<Video>[]>(
     () => [
@@ -99,6 +100,17 @@ function TableVideo({ }: Props) {
     ],
     []
   );
+
+  useEffect(() => { getCount() }, []);
+
+  const getCount = async () => {
+    try {
+      const response = await VideoRepository.getVideoCategories({ search: "", limit: 10000, offset: 0 });
+      setCountCategory(response?.count ?? 0);
+    } catch (e) {
+      notification.danger(handleError(e));
+    }
+  }
 
   const editVideo = async (videoId: number) => {
     try {
@@ -217,18 +229,20 @@ function TableVideo({ }: Props) {
         show={isAdd}
         title="Tambah Video"
         size="sm"
-        close={() => setIsAdd(false) }
-        >
-          <FormAddVideo callback={() => {
-            dataQuery.refetch();
-            setIsAdd(false);
-          }}/>
+        close={() => setIsAdd(false)}
+      >
+        <FormAddVideo callback={() => {
+          dataQuery.refetch();
+          setIsAdd(false);
+        }} />
       </ModalBootstrap>
       <Card>
         <Card.Header>
           <div className='d-flex align-items-center justify-content-between'>
             <Card.Title className="mb-0">Tabel Video</Card.Title>
-            <Button onClick={() => setIsAdd(true)}>Tambah Video</Button>
+            { countCategory > 0 &&
+              <Button onClick={() => setIsAdd(true)}>Tambah Video</Button>
+            }
           </div>
         </Card.Header>
         <Card.Body className="pb-1 table-responsive ">
