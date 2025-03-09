@@ -22,6 +22,7 @@ model Users {
   address               String
   photo                 String?
   role                  Role
+  product               Product[]
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @default(now())
 }
@@ -70,4 +71,25 @@ model PohonDana {
   link                  String
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @default(now())       
+}
+
+model Product {
+  id                    Int               @id @default(autoincrement())
+  name                  String
+  description           String
+  image                 String
+  price                 Int
+  unit                  String
+  category              ProductCategory
+  seller                Users             @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  sellerId              Int
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now())       
+}
+
+enum ProductCategory {
+  buah
+  sayur
+  bibit
+  pupuk
 }

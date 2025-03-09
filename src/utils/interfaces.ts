@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextRequest } from 'next/server';
 import { FeatherIconsTypes, ThemeTypes } from './types';
-import { JwtPayload } from 'jsonwebtoken';
+import { NextApiRequest } from 'next';
 
 export interface INotification {
   id: string;
@@ -42,6 +41,6 @@ export interface IPerson {
   createdAt: Date;
 }
 
-export interface IDecodedJwt extends NextRequest {
-  user: string | JwtPayload;
+export interface IDecodedJwt extends NextApiRequest {
+  userId: number;
 }

@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import * as jose from 'jose'
 
+type Payload = {
+  id: number;
+  email: string;
+  iat: number;
+}
+
 export async function middleware(request: NextRequest) {
   if(request.nextUrl.pathname.startsWith('/api')) 
   {
@@ -10,8 +16,10 @@ export async function middleware(request: NextRequest) {
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
       const user = await jose.jwtVerify(token, secret);
-      request.headers.append('user', user.payload!.jti!);
-      return NextResponse.next()
+      const requestHeaders = new Headers(request.headers)
+      requestHeaders.set('userId', (user.payload as Payload).id.toString());
+      
+      return NextResponse.next({request: {headers: requestHeaders}});
     } catch (error) {
       return NextResponse.json({ message: 'Token tidak valid', code: 403 }, { status: 403 });
     }

@@ -14,6 +14,8 @@ async function main() {
   await prisma.$queryRaw`TRUNCATE Article`;
   await prisma.$queryRaw`TRUNCATE VideoCategory`;
   await prisma.$queryRaw`TRUNCATE Video`;
+  await prisma.$queryRaw`TRUNCATE Product`;
+  await prisma.$queryRaw`TRUNCATE PohonDana`;
 
   const password = await bcrypt.hash('11223344', 8);
 
