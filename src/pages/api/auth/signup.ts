@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import formidable from 'formidable';
 import bcrypt from 'bcrypt';
@@ -38,7 +38,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return;
       }
 
-      const { name, email, password, phone, address } = fields;
+      const { name, email, password, phone, address, role } = fields;
 
       const encryptedPassword = await bcrypt.hash(password![0], 8);
 
@@ -50,7 +50,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             password: encryptedPassword,
             phone: phone![0],
             address: address![0],
-            role: 'seller',
+            role: role ? role![0] as Role : 'seller',
             photo: files.photo[0].newFilename,
           },
         });
