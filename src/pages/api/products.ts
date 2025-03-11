@@ -31,13 +31,15 @@ export default async function handler(
         OR: [
           { name: { contains: search ?? '' } },
           { description: { contains: search ?? '' } },
-          { category: { equals: category as ProductCategory } },
           {
             seller: {
-              address: { contains: search ?? '' }
-            }
-          }
+              address: { contains: search ?? '' },
+            },
+          },
         ],
+        AND: [
+          { category: { equals: category as ProductCategory } },
+        ]
       },
     });
 
@@ -47,7 +49,7 @@ export default async function handler(
       code: 200,
       message: 'Sukses mengambil seluruh data produk',
       data: product,
-      count: count
+      count: count,
     });
   } catch (e) {
     return res.status(500).send({
