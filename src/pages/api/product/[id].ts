@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id: string = req.query.id as string;
-  const product = await prisma.product.findFirst({ where: { id: parseInt(id) } });
+  const product = await prisma.product.findFirst({ where: { id: parseInt(id) }, include: {seller: true} });
   return res.status(200).send({
     code: 200,
     message: 'Sukses mengambil data produk',
