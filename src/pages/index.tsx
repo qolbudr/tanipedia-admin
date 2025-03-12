@@ -10,6 +10,7 @@ import useNotification from '@hooks/useNotification';
 import { handleError } from '@utils/handleError';
 import { useAuthContext } from '@utils/context/AuthContext';
 import { Role } from '@prisma/client';
+import TableTransaksi from '@components/Tables/TableTransaksi';
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -24,7 +25,6 @@ export default function Home() {
   const getCountSeller = async () => {
     try {
       const reponse = await TransactionRepository.getSeller();
-      const reponsse = await TransactionRepository.getAdmin();
       setCount(reponse?.count ?? 0);
     } catch (e) {
       notification.danger(handleError(e))
@@ -51,6 +51,12 @@ export default function Home() {
                     statPercentColor="danger"
                     statDescription="Total penjualan semua produk"
                   />
+                </Col>
+              }
+
+              {auth.user?.role === Role.admin &&
+                <Col sm={12}>
+                  <TableTransaksi/>
                 </Col>
               }
             </Row>
