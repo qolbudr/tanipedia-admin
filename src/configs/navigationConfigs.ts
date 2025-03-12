@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { FeatherIconsTypes, ThemeTypes } from '@utils/types';
 
 interface INavigationSubItems {
@@ -21,15 +22,31 @@ interface INavigationItem {
 interface INavigation {
   [key: string]: {
     title: string;
-    role: 'seller' | 'admin';
+    role: Role[];
     navItems: INavigationItem[];
   };
 }
 
 const navigationConfigs: INavigation = {
+  dashboardPage: {
+    title: 'Dashbaord',
+    role: ['admin', 'seller'],
+    navItems: [
+      {
+        name: 'Dashboard',
+        icon: 'Box',
+        href: '/',
+      },
+      // {
+      //   name: 'Pohon Dana',
+      //   icon: 'Info',
+      //   href: '/master-pohon-dana',
+      // },
+    ],
+  },
   pages: {
     title: 'Master Data',
-    role: 'admin',
+    role: ['admin'],
     navItems: [
       {
         name: 'Pengguna',
@@ -63,7 +80,7 @@ const navigationConfigs: INavigation = {
   },
   sellerPage: {
     title: 'Seller',
-    role: 'seller',
+    role: ['seller'],
     navItems: [
       {
         name: 'Produk',

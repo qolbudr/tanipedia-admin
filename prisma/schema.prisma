@@ -83,6 +83,7 @@ model Product {
   category              ProductCategory
   seller                Users             @relation(fields: [sellerId], references: [id], onDelete: Cascade)
   sellerId              Int
+  transaction           Transaction[]
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @default(now())       
 }
@@ -97,7 +98,9 @@ enum ProductCategory {
 model Transaction {
   id                    Int               @id @default(autoincrement())
   userId                Int
+  product               Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId             Int
+  quantity              Int
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @default(now()) 
 }

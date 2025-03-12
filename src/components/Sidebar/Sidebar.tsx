@@ -36,7 +36,7 @@ export default function Sidebar({}: Props) {
       >
         <SidebarBrand />
         <ul className="sidebar-nav">
-          {Object.keys(navigationConfigs).filter((key) => navigationConfigs[key].role === auth.user?.role).map((key) => {
+          {Object.keys(navigationConfigs).filter((key) => navigationConfigs[key].role.includes(auth.user!.role)).map((key) => {
             return (
               <React.Fragment key={key}>
                 <SidebarHeader title={navigationConfigs[key].title} />
