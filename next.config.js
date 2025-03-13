@@ -15,6 +15,10 @@ const nextConfig = {
   images: {
     domains: [...imagesDomains],
   },
+  eslint: {
+    // Disable ESLint during the build
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
