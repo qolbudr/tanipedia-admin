@@ -10,7 +10,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Tanipedia - Login</title>
+        <title>Farmer.id - Login</title>
       </Head>
       <Row className=" vh-100">
         <Col sm={10} md={8} lg={5} className=" mx-auto d-table h-100">
@@ -18,7 +18,7 @@ export default function LoginPage() {
             <div className="text-center mt-4 mb-4">
               <Image
                 src="/tanipedia.png"
-                alt="Tanipedia Logo"
+                alt="Farmer.id Logo"
                 className="img-fluid"
                 width={132}
                 height={132}

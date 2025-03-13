@@ -10,7 +10,7 @@ export default function UserPage({}: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia - Pengguna</title>
+        <title>Farmer.id - Pengguna</title>
       </Head>
       <Container fluid className="p-0">
         <h1 className="h3 mb-3">Pengguna</h1>

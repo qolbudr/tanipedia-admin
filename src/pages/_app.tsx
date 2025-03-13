@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppPropsWrapp) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="author" content="qolbudr" />
-        <title>Tanipedia</title>
+        <title>Farmer.id</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <SSRProvider>

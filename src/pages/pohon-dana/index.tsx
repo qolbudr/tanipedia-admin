@@ -10,7 +10,7 @@ export default function ArtikelPage({}: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia - Pohon Dana</title>
+        <title>Farmer.id - Pohon Dana</title>
       </Head>
       <Container fluid className="p-0">
         <h1 className="h3 mb-3">Pohon Dana</h1>

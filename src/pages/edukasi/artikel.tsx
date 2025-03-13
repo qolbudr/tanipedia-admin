@@ -11,7 +11,7 @@ export default function ArtikelPage({}: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia - Artikel</title>
+        <title>Farmer.id - Artikel</title>
       </Head>
       <Container fluid className="p-0">
         <h1 className="h3 mb-3">Artikel</h1>

@@ -11,7 +11,7 @@ export default function ProdukPage({}: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia - Produk</title>
+        <title>Farmer.id - Produk</title>
       </Head>
       <Container fluid className="p-0">
         <h1 className="h3 mb-3">Produk</h1>

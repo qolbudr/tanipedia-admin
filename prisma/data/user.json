@@ -1,6 +1,6 @@
 [
   {
-      "email": "admin@tanipedia.id",
+      "email": "admin@farmer.id",
       "name": "Administrator",
       "role": "admin",
       "password": "",
@@ -9,7 +9,7 @@
       "photo": "default-avatar.png"
   },
   {
-      "email": "seller@tanipedia.id",
+      "email": "seller@farmer.id",
       "name": "Seller",
       "role": "seller",
       "password": "",
@@ -18,7 +18,7 @@
       "photo": "default-avatar.png"
   },
   {
-    "email": "user@tanipedia.id",
+    "email": "user@farmer.id",
     "name": "User",
     "role": "pelanggan",
     "password": "",

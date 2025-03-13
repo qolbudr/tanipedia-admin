@@ -9,7 +9,7 @@ function Loader({ }: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia</title>
+        <title>Farmer.id</title>
       </Head>
       <main className="d-flex w-100 vh-100 justify-content-center align-items-center">
         <div className="spinner-grow text-primary" style={{ "width": "3rem", "height": "3rem" }} role="status"></div>

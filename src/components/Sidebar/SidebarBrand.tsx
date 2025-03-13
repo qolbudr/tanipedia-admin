@@ -6,7 +6,7 @@ type Props = {};
 function SidebarBrand({}: Props) {
   return (
     <Link className="sidebar-brand text-center" href="/">
-      <span className="align-middle">Tanipedia</span>
+      <span className="align-middle">Farmer.id</span>
     </Link>
   );
 }

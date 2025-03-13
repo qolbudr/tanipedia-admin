@@ -13,7 +13,7 @@ export default function VideoPage({}: Props) {
   return (
     <>
       <Head>
-        <title>Tanipedia - Video</title>
+        <title>Farmer.id - Video</title>
       </Head>
       <Container fluid className="p-0">
         <h1 className="h3 mb-3">Kategori Video</h1>
