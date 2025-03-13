@@ -53,6 +53,8 @@
     "jsonwebtoken": "^9.0.2",
     "jsvectormap": "^1.5.1",
     "next": "13.2.4",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^10.1.5",
     "prisma": "^5.21.1",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
