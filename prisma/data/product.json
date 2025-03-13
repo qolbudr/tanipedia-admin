@@ -1,0 +1,11 @@
+[
+  {
+      "name": "Tomat Segar",
+      "description": "Tomat segar dari alaska ditanam dengan penuh kasih sayang",
+      "image": "tomat.png",
+      "price": 5000,
+      "unit": "Kg",
+      "category": "buah",
+      "sellerId": 2
+  }
+]

@@ -4,6 +4,8 @@ const userData: Array<any> = require('./data/user.json');
 const articleData: Array<any> = require('./data/article.json');
 const videoCategoryData: Array<any> = require('./data/video_category.json');
 const videoData: Array<any> = require('./data/video.json');
+const productData: Array<any> = require('./data/product.json');
+const pohonDanaData: Array<any> = require('./data/pohon_dana.json');
 
 const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
@@ -16,6 +18,7 @@ async function main() {
   await prisma.$queryRaw`TRUNCATE Video`;
   await prisma.$queryRaw`TRUNCATE Product`;
   await prisma.$queryRaw`TRUNCATE PohonDana`;
+  await prisma.$queryRaw`TRUNCATE Transaction`;
 
   const password = await bcrypt.hash('11223344', 8);
 
@@ -38,6 +41,16 @@ async function main() {
   for (let i = 0; i < videoData.length; i++) {
     let element = videoData[i];
     await prisma.video.create({ data: element });
+  }
+
+  for (let i = 0; i < productData.length; i++) {
+    let element = productData[i];
+    await prisma.product.create({ data: element });
+  }
+
+  for (let i = 0; i < pohonDanaData.length; i++) {
+    let element = pohonDanaData[i];
+    await prisma.pohonDana.create({ data: element });
   }
 }
 
