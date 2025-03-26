@@ -131,6 +131,7 @@ const FormAddProduk = ({ callback }: { callback: () => void }) => {
           <option value={"sayur"}>Sayur</option>
           <option value={"bibit"}>Bibit</option>
           <option value={"pupuk"}>Pupuk</option>
+          <option value={"biji"}>Biji Bijian</option>
         </Form.Select>
         {errors?.category?.message ? (
           <Form.Control.Feedback type="invalid" className=" pt-1">
