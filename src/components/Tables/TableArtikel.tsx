@@ -63,7 +63,7 @@ function TableArtikel({ }: Props) {
       {
         accessorKey: 'image',
         header: () => <span>Gambar</span>,
-        cell: (data) => <Image style={{objectFit: 'cover'}} width={100} height={100} src={`/article/${data.row.original.image}`} alt={data.row.original.image}/>
+        cell: (data) => <img style={{ objectFit: 'cover' }} width={100} height={100} src={location.origin + `/article/${data.row.original.image}`} alt={data.row.original.image} />
       },
       {
         accessorKey: 'title',
@@ -209,12 +209,12 @@ function TableArtikel({ }: Props) {
         show={isAdd}
         title="Tambah Artikel"
         size="md"
-        close={() => setIsAdd(false) }
-        >
-          <FormAddArtikel callback={() => {
-            dataQuery.refetch();
-            setIsAdd(false);
-          }}/>
+        close={() => setIsAdd(false)}
+      >
+        <FormAddArtikel callback={() => {
+          dataQuery.refetch();
+          setIsAdd(false);
+        }} />
       </ModalBootstrap>
       <Card>
         <Card.Header>

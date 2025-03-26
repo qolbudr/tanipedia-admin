@@ -64,7 +64,7 @@ function TableProduct({ }: Props) {
       {
         accessorKey: 'image',
         header: () => <span>Gambar</span>,
-        cell: (data) => <Image style={{objectFit: 'cover'}} width={100} height={100} src={`/product/${data.row.original.image}`} alt={data.row.original.image}/>
+        cell: (data) => <img style={{ objectFit: 'cover' }} width={100} height={100} src={location.origin + `/product/${data.row.original.image}`} alt={data.row.original.image} />
       },
       {
         accessorKey: 'name',
@@ -210,12 +210,12 @@ function TableProduct({ }: Props) {
         show={isAdd}
         title="Tambah Produk"
         size="md"
-        close={() => setIsAdd(false) }
-        >
-          <FormAddProduk callback={() => {
-            dataQuery.refetch();
-            setIsAdd(false);
-          }}/>
+        close={() => setIsAdd(false)}
+      >
+        <FormAddProduk callback={() => {
+          dataQuery.refetch();
+          setIsAdd(false);
+        }} />
       </ModalBootstrap>
       <Card>
         <Card.Header>

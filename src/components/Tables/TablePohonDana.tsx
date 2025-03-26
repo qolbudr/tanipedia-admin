@@ -66,7 +66,7 @@ function TablePohonDana({ }: Props) {
       {
         accessorKey: 'image',
         header: () => <span>Gambar</span>,
-        cell: (data) => <Image style={{objectFit: 'cover'}} width={100} height={100} src={`/pohon-dana/${data.row.original.image}`} alt={data.row.original.image}/>
+        cell: (data) => <img style={{ objectFit: 'cover' }} width={100} height={100} src={location.origin + `/pohon-dana/${data.row.original.image}`} alt={data.row.original.image} />
       },
       {
         accessorKey: 'title',
@@ -216,12 +216,12 @@ function TablePohonDana({ }: Props) {
         show={isAdd}
         title="Tambah Pohon Dana"
         size="md"
-        close={() => setIsAdd(false) }
-        >
-          <FormAddPohonDana callback={() => {
-            dataQuery.refetch();
-            setIsAdd(false);
-          }}/>
+        close={() => setIsAdd(false)}
+      >
+        <FormAddPohonDana callback={() => {
+          dataQuery.refetch();
+          setIsAdd(false);
+        }} />
       </ModalBootstrap>
       <Card>
         <Card.Header>
